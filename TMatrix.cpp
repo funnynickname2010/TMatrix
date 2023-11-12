@@ -11,6 +11,9 @@ TMatrix::TMatrix(int n) : arr(n)
 			arr[i][j] = 0;
 		}
 	}
+
+	size_columns = n;
+	size_lines = n;
 }
 
 TMatrix::TMatrix(int n, int m) : arr(n)
@@ -24,6 +27,9 @@ TMatrix::TMatrix(int n, int m) : arr(n)
 			arr[i][j] = 0;
 		}
 	}
+
+	size_columns = m;
+	size_lines = n;
 }
 
 TMatrix TMatrix::operator+(const TMatrix& matrix)
@@ -93,6 +99,31 @@ TMatrix TMatrix::operator*(TMatrix& matrix)
 	catch (...)
 	{
 		throw std::exception("TMatrix operator*(const TMatrix& matrix) failure.");
+	}
+
+	return result;
+}
+
+TMatrix TMatrix::operator*(const double scalar)
+{
+	TMatrix result(this->size_lines, this->size_columns);
+
+	result.arr = this->arr * scalar;
+
+	return result;
+}
+
+TMatrix TMatrix::operator/(const double scalar)
+{
+	TMatrix result(this->size_lines, this->size_columns);
+
+	if (scalar != 0)
+	{
+		result.arr = this->arr / scalar;
+	}
+	else
+	{
+		throw std::exception("TMatrix::operator/ (const double scalar) failure: division by zero.");
 	}
 
 	return result;
@@ -170,7 +201,7 @@ std::ostream& operator<<(std::ostream& os, const TMatrix& matrix)
 	{
 		try
 		{
-			os << matrix.arr[i];
+			os << matrix.arr[i] << std::endl;
 		}
 		catch (...)
 		{

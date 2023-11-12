@@ -16,6 +16,8 @@ public:
 	TMatrix operator +(const TMatrix& matrix);
 	TMatrix operator -(const TMatrix& matrix);
 	TMatrix operator *(TMatrix& matrix);
+	TMatrix operator *(const double scalar);
+	TMatrix operator /(const double scalar);
 	TMatrix& operator +=(const TMatrix& matrix);
 	TMatrix& operator -=(const TMatrix& matrix);
 	TVector<MyType>& operator [](int index);
