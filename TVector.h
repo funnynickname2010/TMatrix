@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <iomanip>
+#define MySetw 15
 
 
 template <class T>
@@ -47,9 +49,21 @@ public:
 
 	friend std::ostream& operator <<(std::ostream& os, const TVector<T>& vec)
 	{
+		int padding;
 		try
 		{
+			padding = (MySetw - std::to_string(vec.val[0]).length()) / 2;
+			for (int i = 0; i < padding; ++i)
+			{
+				os << " ";
+				
+			}
+			if (((MySetw - std::to_string(vec.val[0]).length()) / 2) % 2 == 1) { os << " "; }
 			os << vec.val[0];
+			for (int i = 0; i < padding; ++i)
+			{
+				os << " ";
+			}
 		}
 		catch (...)
 		{
@@ -60,7 +74,18 @@ public:
 		{
 			try
 			{
-				os << " " << vec.val[i];
+				padding = (MySetw - std::to_string(vec.val[i]).length()) / 2;
+				for (int i = 0; i < padding; ++i)
+				{
+					os << " ";
+					
+				}
+				if (((MySetw - std::to_string(vec.val[i]).length()) / 2) % 2 == 1) { os << " "; }
+				os << vec.val[i];
+				for (int i = 0; i < padding; ++i)
+				{
+					os << " ";
+				}
 			}
 			catch (...)
 			{
@@ -73,33 +98,28 @@ public:
 
 	friend std::istream& operator>>(std::istream& is, TVector<T>& vec)
 	{
+		// Skip leading newline
 		if (is.peek() == '\n')
 		{
 			is.ignore();
 		}
 
+		// Read the input line
 		std::string input;
 		std::getline(is, input);
 		std::istringstream inps(input);
 
+		// Skip opening parenthesis
 		if (inps.peek() == '(')
 		{
 			inps.ignore();
 		}
 
+		// Read vector elements
 		for (int i = 0; i < vec.size; i++)
 		{
 			try
 			{
-				if (i != 0)
-				{
-					/*if (!(inps.get() == ','))
-					{
-						// Error handling: Failed to extract comma
-						is.setstate(std::ios::failbit);
-						break;
-					}*/
-				}
 				if (!(inps >> vec.val[i]))
 				{
 					// Error handling: Failed to extract vector element
@@ -113,24 +133,27 @@ public:
 			}
 		}
 
+		// Skip space after elements
 		if (inps.peek() == ' ')
 		{
-			inps.ignore(); // Skipping the space before ')' if there's one
+			inps.ignore();
 		}
 
+		// Skip closing parenthesis
 		if (inps.peek() == ')')
 		{
 			inps.ignore();
 		}
 
-		if (is.rdstate() == std::ios::failbit)
+		// Check for failbit and handle errors
+		if (is.fail())
 		{
+			// Uncomment the line below if you want to throw an exception for failbit
 			throw std::exception("TVector std::istream& operator>> error: std::ios::failbit.");
 		}
 
-		// Clear any error flags that may have been set on the stream
+		// Clear any error flags and return the stream
 		is.clear();
-
 		return is;
 	}
 };
@@ -532,7 +555,7 @@ inline TVector<T> TVector<T>::operator -(const TVector<T>& vec)
 template <class T>
 inline TVector<T> TVector<T>::operator *(const double scalar)
 {
-	TVector res(size);
+	TVector<T> res(size);
 
 	for (int i = 0; i < size; i++)
 	{
@@ -552,7 +575,7 @@ inline TVector<T> TVector<T>::operator *(const double scalar)
 template <class T>
 inline TVector<T> TVector<T>::operator /(const double scalar)
 {
-	TVector res(size);
+	TVector<T> res(size);
 
 	if (scalar != 0)
 	{
@@ -588,7 +611,7 @@ inline T& TVector<T>::operator [](const int index)
 	{
 		return val[size + index];
 	}
-	else if (abs(index) > size)
+	else if (abs(index) >= size)
 	{
 		throw std::exception("TVector::operator [](const int index) failure: abs(index) > size");
 	}

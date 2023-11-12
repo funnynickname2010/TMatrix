@@ -1,7 +1,7 @@
 #pragma once
 #include "TVector.h"
 #include <cmath>
-#define MyType int
+#define MyType long long int
 
 class TMatrix
 {

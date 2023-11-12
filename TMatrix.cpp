@@ -223,7 +223,7 @@ std::istream& operator>>(std::istream& os, TMatrix& matrix)
 	}
 	catch (...)
 	{
-		std::exception("TMatrix std::istream& operator>> failure.");
+		throw std::exception("TMatrix std::istream& operator>> failure.");
 	}
 
 	return os;

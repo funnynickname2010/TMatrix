@@ -1,50 +1,48 @@
 #include "TMatrix.h"
 #define MyTypeScalar int
 
+void ExpectedInput(int& target_variable, const char* text)
+{
+	do
+	{
+		std::cout << text;
+		std::cin >> target_variable;
+	} while (target_variable <= 0);
+}
+
 int main()
 {
-	/*
-	* TMatrix operator +(const TMatrix& matrix);
-	TMatrix operator -(const TMatrix& matrix);
-	TMatrix operator *(TMatrix& matrix);
-	TMatrix& operator +=(const TMatrix& matrix);
-	TMatrix& operator -=(const TMatrix& matrix);
-	TVector<MyType>& operator [](int index);
-	TVector<MyType>& operator [](int index) const;
+	int matrix_temp_size_lines_1 = 0;
+	int matrix_temp_size_columns_1 = 0;
+	int matrix_temp_size_lines_2 = 0;
+	int matrix_temp_size_columns_2 = 0;
 
-	bool operator ==(const TMatrix& matrix) const;
-	bool operator !=(const TMatrix& matrix) const;
+	ExpectedInput(matrix_temp_size_lines_1, "Input matrix_1 number of lines: ");
+	ExpectedInput(matrix_temp_size_columns_1, "Input matrix_1 number of columns: ");
 
-	double Determinant();
-
-	friend std::ostream& operator <<(std::ostream& os, const TMatrix& matrix);
-	friend std::istream& operator >>(std::istream& os, TMatrix& matrix);
-	*/
-
-	unsigned int matrix_temp_size_lines_1, matrix_temp_size_columns_1;
-	unsigned int matrix_temp_size_lines_2, matrix_temp_size_columns_2;
-
-	std::cout << "Input matrix_1 number of lines: ";
-	std::cin >> matrix_temp_size_lines_1;
-	std::cout << "Input matrix_1 number of columns: ";
-	std::cin >> matrix_temp_size_columns_1;
-
-	std::cout << "Input matrix_2 number of lines: ";
-	std::cin >> matrix_temp_size_lines_2;
-	std::cout << "Input matrix_2 number of columns: ";
-	std::cin >> matrix_temp_size_columns_2;
+	//ExpectedInput(matrix_temp_size_lines_2, "Input matrix_2 number of lines: ");
+	//ExpectedInput(matrix_temp_size_columns_2, "Input matrix_2 number of columns: ");
+	std::cin.clear();
 
 	TMatrix matrix1(matrix_temp_size_lines_1, matrix_temp_size_columns_1);
 	TMatrix matrix2(matrix_temp_size_lines_2, matrix_temp_size_columns_2);
 
 
+	
 	std::cout << "Input matrix1: " << std::endl;
-	std::cin >> matrix1;
-	std::cout << "Input matrix2: " << std::endl;
-	std::cin >> matrix2;
 
-	std::cout << std::endl << matrix1 << std::endl << std::endl;
-	std::cout << std::endl << matrix2 << std::endl << std::endl;
+	try
+	{
+		std::cin >> matrix1;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what();
+	}
+
+
+	//std::cout << "Input matrix2: " << std::endl;
+	//std::cin >> matrix2;
 
 	std::cout << "+" << std::endl;
 	try
@@ -139,12 +137,13 @@ int main()
 		std::cout << "Input columns index for matrix_1: ";
 		std::cin >> temp_columns_index1;
 
+		std::cout << matrix1[temp_lines_index1][temp_columns_index1] << std::endl;
+		
 		std::cout << "Input lines index for matrix_2: ";
 		std::cin >> temp_lines_index2;
 		std::cout << "Input columns index for matrix_2: ";
 		std::cin >> temp_columns_index2;
 
-		std::cout << matrix1[temp_lines_index1][temp_columns_index1] << std::endl;
 		std::cout << matrix2[temp_lines_index2][temp_columns_index2] << std::endl;
 	}
 	catch (const std::exception& ex)
