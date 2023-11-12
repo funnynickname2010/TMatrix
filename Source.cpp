@@ -20,19 +20,16 @@ int main()
 	ExpectedInput(matrix_temp_size_lines_1, "Input matrix_1 number of lines: ");
 	ExpectedInput(matrix_temp_size_columns_1, "Input matrix_1 number of columns: ");
 
-	//ExpectedInput(matrix_temp_size_lines_2, "Input matrix_2 number of lines: ");
-	//ExpectedInput(matrix_temp_size_columns_2, "Input matrix_2 number of columns: ");
+	ExpectedInput(matrix_temp_size_lines_2, "Input matrix_2 number of lines: ");
+	ExpectedInput(matrix_temp_size_columns_2, "Input matrix_2 number of columns: ");
 	std::cin.clear();
 
 	TMatrix matrix1(matrix_temp_size_lines_1, matrix_temp_size_columns_1);
 	TMatrix matrix2(matrix_temp_size_lines_2, matrix_temp_size_columns_2);
 
-
-	
-	std::cout << "Input matrix1: " << std::endl;
-
 	try
 	{
+		std::cout << "Input matrix1: " << std::endl;
 		std::cin >> matrix1;
 	}
 	catch (const std::exception& e)
@@ -40,6 +37,15 @@ int main()
 		std::cout << e.what();
 	}
 
+	try
+	{
+		std::cout << "Input matrix2: " << std::endl;
+		std::cin >> matrix2;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what();
+	}
 
 	//std::cout << "Input matrix2: " << std::endl;
 	//std::cin >> matrix2;
@@ -138,13 +144,13 @@ int main()
 		std::cin >> temp_columns_index1;
 
 		std::cout << matrix1[temp_lines_index1][temp_columns_index1] << std::endl;
-		
+		/*
 		std::cout << "Input lines index for matrix_2: ";
 		std::cin >> temp_lines_index2;
 		std::cout << "Input columns index for matrix_2: ";
 		std::cin >> temp_columns_index2;
 
-		std::cout << matrix2[temp_lines_index2][temp_columns_index2] << std::endl;
+		std::cout << matrix2[temp_lines_index2][temp_columns_index2] << std::endl;*/
 	}
 	catch (const std::exception& ex)
 	{

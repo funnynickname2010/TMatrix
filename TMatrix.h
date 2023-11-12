@@ -26,8 +26,6 @@ public:
 	bool operator ==(const TMatrix& matrix) const;
 	bool operator !=(const TMatrix& matrix) const;
 
-	double Determinant();
-
 	friend std::ostream& operator <<(std::ostream& os, const TMatrix& matrix);
 	friend std::istream& operator >>(std::istream& os, TMatrix& matrix);
 };

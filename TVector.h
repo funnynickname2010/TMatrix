@@ -58,7 +58,6 @@ public:
 				os << " ";
 				
 			}
-			if (((MySetw - std::to_string(vec.val[0]).length()) / 2) % 2 == 1) { os << " "; }
 			os << vec.val[0];
 			for (int i = 0; i < padding; ++i)
 			{
@@ -80,7 +79,6 @@ public:
 					os << " ";
 					
 				}
-				if (((MySetw - std::to_string(vec.val[i]).length()) / 2) % 2 == 1) { os << " "; }
 				os << vec.val[i];
 				for (int i = 0; i < padding; ++i)
 				{
@@ -104,10 +102,19 @@ public:
 			is.ignore();
 		}
 
+
 		// Read the input line
 		std::string input;
 		std::getline(is, input);
 		std::istringstream inps(input);
+
+		inps >> std::ws;
+
+		//while (inps.peek() == '\n')
+		//{
+		//	inps.ignore();
+		//	inps >> std::ws;
+		//}
 
 		// Skip opening parenthesis
 		if (inps.peek() == '(')
